@@ -20,11 +20,26 @@ class StudentsController < ApplicationController
        end
     end
 
-    def show
+    
+    def edit
         @student = Student.find(params[:id])
     end
+    def update
+        @student = Student.find(params[:id])
+        if @student.update(student_params)
+            redirect_to @student
+        else
+            render :new, status: :unprocessable_entity
+        end
+    end
+
+    def destroy
+        @student = Student.find(params[:id])
+        @student.destroy
+        redirect_to root_path, status: :see_other
+    end
     private
-        def student_params
+        def student_params1
             params.require(:student).permit(:firstname, :lastname, :email)
         end
 
