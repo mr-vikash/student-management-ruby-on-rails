@@ -16,7 +16,7 @@ class StudentsController < ApplicationController
        if @student.save 
         redirect_to students_path
        else
-        render :new 
+        render :new, status: :unprocessable_entity
        end
     end
     private
